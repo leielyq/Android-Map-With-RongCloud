@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+ext {
+    publishedGroupId='com.leielyq.map_with_rong_cloud'
+    artifact = 'plugin'
+    publishedVersion = "0.2.2"
+    libraryDescription = 'map_with_rong_cloud'
+}
+apply from: '../upload.gradle'
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation('com.android.support:appcompat-v7:28.0.0')
+
+    api('com.mapbox.mapboxsdk:mapbox-android-sdk:7.4.0')
+
+//    api 'com.mapbox.mapboxsdk:mapbox-android-plugin-china:2.3.0'
+
+    api('com.mapbox.mapboxsdk:mapbox-sdk-services:4.6.0')
+    api('com.mapbox.mapboxsdk:mapbox-android-plugin-places-v8:0.9.0')
+    api('cn.rongcloud.sdk:im_kit:2.9.24')
+    //im_kit必须依赖im_lib，所以需要加入对应依赖
+    api('cn.rongcloud.sdk:im_lib:2.9.24')
+    implementation('com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v8:0.3.0')
+}
